@@ -42,3 +42,22 @@ Route::get('/addOrganization', function (){
     $countries = \App\country::all();
     return view('addOrganization')->with(compact('organizations', 'countries'));
 });
+
+Route::put('/category', 'categoryController@add');
+Route::delete('/category/{id}', 'categoryController@delete');
+Route::patch('/category/{id}', 'categoryController@update');
+Route::get('/addCategory', function (){
+    $categories = \App\tag::all();
+    return view('addCategory')->with(compact('categories'));
+});
+
+Route::put('/fund', 'fundController@add');
+Route::get('/fund/{id}', 'fundController@show');
+Route::get('/addFund', function (){
+    $funds = \App\fund::all();
+    $organizations = \App\organization::with('country')->get();
+    $fields = \App\field::all();
+    $categories = \App\tag::all();
+    return view('addFund')->with(compact('funds', 'organizations', 'fields', 'categories'));
+});
+

@@ -16,19 +16,19 @@ class CreateFundTable extends Migration
         Schema::create('funds', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->integer('rating');
-            $table->string('acceptance');
-            $table->text('description');
-            $table->text('duration');
-            $table->text('financial');
-            $table->text('requirements');
-            $table->text('deadline');
-            $table->text('link1');
-            $table->text('link2');
-            $table->text('memo');
+            $table->string('acceptance')->nullable();
+            $table->text('description')->nullable();
+            $table->text('duration')->nullable();
+            $table->text('financial')->nullable();
+            $table->text('requirements')->nullable();
+            $table->text('deadline')->nullable();
+            $table->text('link1')->nullable();
+            $table->text('link2')->nullable();
+            $table->text('memo')->nullable();
             $table->text('farsi');
-            $table->text('comments');
+            $table->text('comments')->nullable();
             $table->integer('organization_id')->unsigned();
         });
     }

@@ -15,11 +15,11 @@ class searchController extends Controller
 
     public function search(Request $r){
 //        $filter = ;
-        $org_ids = [1,2];
-        $field_ids = [1,3];
-        $tag_ids = [1,2,3];
-        $country_ids = [2,1];
-        $ratings = [3];
+        $org_ids = [2];
+        $field_ids = [];
+        $tag_ids = [];
+        $country_ids = [1];
+        $ratings = [];
 
         $filteredByOrgs = $this->filterByOrg($org_ids);
         $filteredByOrgsNFields = $this->filterByField($filteredByOrgs, $field_ids);
@@ -32,7 +32,14 @@ class searchController extends Controller
     }
 
     private function filterByOrg($org_ids){
+
         $res = array();
+        if(empty($org_ids)){
+            foreach (fund::all() as $fund)
+                array_push($res, $fund->id);
+            return $res;
+        }
+
         $tmp = organization::find($org_ids);
         foreach ($tmp as $t){
             foreach ($t->funds as $fund)
@@ -43,6 +50,8 @@ class searchController extends Controller
 
 
     private function filterByField($filteredBeforeResult, $field_ids){
+        if(empty($field_ids))
+            return $filteredBeforeResult;
         $ree = array();
         $rmp = field::find($field_ids);
         foreach ($rmp as $r){
@@ -54,6 +63,8 @@ class searchController extends Controller
     }
 
     private function filterByTag($filteredBeforeResult, $tag_ids){
+        if(empty($tag_ids))
+            return $filteredBeforeResult;
         $ree = array();
         $rmp = tag::find($tag_ids);
         foreach ($rmp as $r){
@@ -66,6 +77,8 @@ class searchController extends Controller
     }
 
     private function filterByCountry($filteredBeforeResult, $country_ids){
+        if(empty($country_ids))
+            return $filteredBeforeResult;
         $ree = array();
         $rmp = country::find($country_ids);
         foreach ($rmp as $r){
@@ -78,6 +91,8 @@ class searchController extends Controller
     }
 
     private function filterByRating($before, $ratings){
+        if(empty($ratings))
+            return $before;
         $res = array();
         foreach ($ratings as $rating){
             $funds = fund::where('rating', $rating)->get();

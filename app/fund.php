@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class fund extends Model
 {
     //
+    protected $fillable = ['name', 'rating', 'description', 'farsi', 'organization_id'];
     public function organization(){
         return $this->belongsTo(organization::class);
     }

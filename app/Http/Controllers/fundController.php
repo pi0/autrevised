@@ -36,4 +36,34 @@ class fundController extends Controller
         $fields = $funds->fields->all();
         return view('fundShow')->with(compact('funds', 'categories', 'organizations', 'country', 'fields'));
     }
+
+    public function update(Request $r, $id){
+        $field_name = $r->field_name;
+        $fund_id = $id;
+        $field_value = $r->value;
+        $fund = fund::find($fund_id);
+
+        if($field_name!= "organization" && $field_name!="field" && $field_name!= "category"){
+            $fund->update([$field_name => $field_value]);
+//            return a part of view we need to reload
+            return redirect('/fund/1');
+        }
+
+        if($field_name == "organization"){
+            $fund->organization_id = $field_value;
+            $fund->organization()->dissociate();
+            $fund->organization()->associate(organization::find($field_value));
+        } elseif ($field_name == "field"){
+            $fund->fields()->detach();
+            foreach ($field_value as $field)
+                $fund->fields()->attach(field::find($field));
+        } elseif ($field_name == "category") {
+            $fund->tags()->detach();
+            foreach ($field_value as $category)
+                $fund->tags()->attach(tag::find($category));
+        }
+        // return the part of page needed to reload
+        $fund->save();
+        return redirect('/fund/1');
+    }
 }

@@ -15,10 +15,10 @@ class searchController extends Controller
 
     public function search(Request $r){
 //        $filter = ;
-        $org_ids = [2];
+        $org_ids = [];
         $field_ids = [];
         $tag_ids = [];
-        $country_ids = [1];
+        $country_ids = [2];
         $ratings = [];
 
         $filteredByOrgs = $this->filterByOrg($org_ids);

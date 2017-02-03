@@ -52,12 +52,13 @@ Route::get('/addCategory', function (){
 });
 
 Route::put('/fund', 'fundController@add');
+Route::patch('/fund/{id}', 'fundController@update');
 Route::get('/fund/{id}', 'fundController@show');
 Route::get('/addFund', function (){
-    $funds = \App\fund::all();
+    $fund = \App\fund::find(1);
     $organizations = \App\organization::with('country')->get();
     $fields = \App\field::all();
     $categories = \App\tag::all();
-    return view('addFund')->with(compact('funds', 'organizations', 'fields', 'categories'));
+    return view('addFund')->with(compact('fund', 'organizations', 'fields', 'categories'));
 });
 

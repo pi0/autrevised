@@ -1,0 +1,86 @@
+.my-top-navbar{
+    background-color: #ed6e73;
+}
+
+.top-nabvar-text{
+    color: #ffffff;
+}
+
+.my-whole-page{
+    background-color: #74c968;
+}
+
+.title{
+    color: #bebebe;
+    margin: 15px 0 15px 0;
+}
+
+.filter_res {
+    background-color: #f1f1f1;
+    margin: 15px;
+}
+
+.side-list{
+    padding: 5px 0 0 0;
+    background-color: #f0f0f0;
+}
+
+.my-list{
+    padding: 5px 0 0 0;
+    background-color: white;
+}
+
+.fa{
+    padding:5px;
+    color: red;
+    font-size: 25px;
+}
+
+.list-span{
+    position: relative;
+    bottom: 3px;
+}
+
+.my-tabs:hover, .my-pill:hover{
+    color: #ed6e73;
+    background-color: white;
+}
+
+.my-input{
+    margin-top: 15px;
+}
+
+.well-input{
+    background-color: #f1f1f1;
+}
+
+.my-tabs{
+    color: #74c968;
+}
+
+.tabs-border {
+    /*border-bottom: solid 1px #bebebe;*/
+    border-left: solid 1px #bfbfbf;
+    border-right: solid 1px #bfbfbf;
+    border-radius: 2px;
+}
+
+.well{
+    background-color: white;
+}
+
+.my-stack{
+    font-size: 12px;
+}
+
+.my-pill {
+    color: #5c5c5c;
+}
+
+.my-btn{
+    margin: 1px 0 5px 0;
+}
+
+option{
+    padding: 10px;
+}

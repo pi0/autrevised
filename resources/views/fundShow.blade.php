@@ -21,6 +21,10 @@
                         <li>{{$field->id}} - {{ $field->title }}</li>
                     @endforeach
                 </ul>
+                <ul><h3>Comments</h3>
+
+                        <li>{{ $funds->comments }}</li>
+                </ul>
             </li>
 
         {{--@endforeach--}}

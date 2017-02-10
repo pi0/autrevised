@@ -170,6 +170,7 @@ return [
 
 
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // Laravel IDE helper
+        'Maatwebsite\Excel\ExcelServiceProvider', // Laravel Excel
 
         //
 
@@ -229,7 +230,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
     ],
 
 ];

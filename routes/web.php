@@ -47,7 +47,7 @@ Route::put('/category', 'categoryController@add');
 Route::delete('/category/{id}', 'categoryController@delete');
 Route::patch('/category/{id}', 'categoryController@update');
 Route::get('/addCategory', function (){
-    $categories = \App\tag::all();
+    $categories = \App\tag::orderBy('real')->get();
     return view('addCategory')->with(compact('categories'));
 });
 
@@ -62,3 +62,10 @@ Route::get('/addFund', function (){
     return view('addFund')->with(compact('fund', 'organizations', 'fields', 'categories'));
 });
 
+Route::get('/import', 'importController@show');
+Route::post('/import', 'importController@import');
+
+
+Route::get('/page1', function(){
+   return view('1page');
+});

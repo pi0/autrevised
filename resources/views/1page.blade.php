@@ -1,52 +1,12 @@
-
-
-
 @extends('layouts.app')
 
 @section('content')
-<h3>Funds </h3>
-<ul>
-    @foreach($funds as $fund)
-        <li>
-            {{$fund->name}}
-        </li>
-    @endforeach
-</ul>
-
-<h3>countries </h3>
-<ul>
-    @foreach($countries as $country)
-        <li>
-            {{$country->name}}
-        </li>
-    @endforeach
-</ul>
-
-
-<h3>Organizations </h3>
-<ul>
-    @foreach($organizations as $org)
-        <li>
-            {{$org->name}} - {{$org->country->name}}
-        </li>
-    @endforeach
-</ul>
-
-<h3>Fields </h3>
-<ul>
-    @foreach($fields as $field)
-        <li>
-            {{$field->title}}
-        </li>
-    @endforeach
-</ul>
-
 
 <div class="container my-whole-page">
     <div class="row">
         <div class="container-fluid filter_res col-lg-4 col-sm-4">
             <h2 class="title">Filters</h2>
-            <ul class="panel-group">
+            <ul class="list-group">
                 <li class="list-group-item side-list">
                     <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
                     <span class="list-span">Category</span>
@@ -55,38 +15,21 @@
                     <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
                     <span class="list-span">Funding Organization</span>
                 </li>
-
-                <li>
-                    <a data-toggle="collapse" href="#countryPan" class="list-group-item side-list" id="Country">
-                        <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
-                        <span class="list-span">Country</span>
-                    </a>
+                <li class="list-group-item side-list">
+                    <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
+                    <span class="list-span">Country</span>
                 </li>
-                <div class="panel-collapse collapse" id="countryPan">
-                    <ul class="list-group nav nav-pills nav-stacked my-stack" id="CountryFilter" style="display: none">
-                        @foreach($countries as $country)
-                            <li id="{{$country->id}}">
-                                <a class="my-pill" href="#">{{$country->name}}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-
-                <li data-toggle="collapse" href="#resPan" class="list-group-item side-list" id="ResearchArea">
+                <li class="list-group-item side-list" id="ResearchArea">
                     <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
                     <span class="list-span">Research Area</span>
 
 
                 </li>
-                <div class="panel-collapse collapse" id="resPan">
-                    <ul class="list-group nav nav-pills nav-stacked my-stack" id="ResearchAreaOpen" style="display: none">
-                        @foreach($fields as $field)
-                            <li id="{{$field->id}}" class="list-group-item">
-                                <a class="my-pill" href="#">{{$field->title}}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+                <ul class="list-group-item nav nav-pills nav-stacked my-stack" id="ResearchAreaOpen" style="display: none">
+                    <li id="All"><a class="my-pill" href="#">All</a></li>
+                    <li id="Aerospace"><a class="my-pill" href="#">Aerospace</a></li>
+                    <li id="Electrical"><a class="my-pill" href="#">Electrical</a></li>
+                </ul>
             </ul>
         </div>
         <div class="container-fluid col-sm-7 col-lg-7">
@@ -106,7 +49,7 @@
 
                     <div id="myTabContent" class="tab-content">
                         <!--<div class="tab-pane active" id="home">-->
-                        <!--<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>-->
+                            <!--<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>-->
                         <!--</div>-->
 
                         <ul class="list-group tab-pane active" style="margin-top: 10px">
@@ -139,6 +82,5 @@
 </div>
 
 <script src="{{asset('js/my-js1.js')}}"></script>
-
 
 @endsection

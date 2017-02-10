@@ -18,8 +18,8 @@ class searchController extends Controller
         $org_ids = [];
         $field_ids = [];
         $tag_ids = [];
-        $country_ids = [2];
-        $ratings = [];
+        $country_ids = [];
+        $ratings = [4];
 
         $filteredByOrgs = $this->filterByOrg($org_ids);
         $filteredByOrgsNFields = $this->filterByField($filteredByOrgs, $field_ids);

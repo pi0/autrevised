@@ -14,21 +14,40 @@ class searchController extends Controller
 
 
     public function search(Request $r){
-//        $filter = ;
-        $org_ids = [];
-        $field_ids = [];
-        $tag_ids = [];
-        $country_ids = [];
-        $ratings = [4];
+        $filter = $r->filter;
+        $offset = $r->offset * 5;
+
+//        return $filter;
+        if(isset($filter['$org_ids']))
+            $org_ids = $filter['$org_ids'];
+        else
+            $org_ids = [];
+
+        if(isset($filter['$field_ids']))
+            $field_ids = $filter['$field_ids'];
+        else
+            $field_ids = [];
+
+        if(isset($filter['$tag_ids']))
+            $tag_ids = $filter['$tag_ids'];
+        else
+            $tag_ids = [];
+
+        if(isset($filter['$country_ids']))
+            $country_ids = $filter['$country_ids'];
+        else
+            $country_ids = [];
+        $ratings = [];
 
         $filteredByOrgs = $this->filterByOrg($org_ids);
         $filteredByOrgsNFields = $this->filterByField($filteredByOrgs, $field_ids);
         $filteredByOrgFieldTag = $this->filterByTag($filteredByOrgsNFields, $tag_ids);
         $filteredByOrgFieldTagCountry = $this->filterByCountry($filteredByOrgFieldTag, $country_ids);
         $final = $this->filterByRating($filteredByOrgFieldTagCountry, $ratings);
-        $finalResults = fund::find($final);
-
-        return $finalResults;
+        $count = fund::find($final)->count();
+        $Results = fund::with('organization')->find($final)->toArray();
+        $finalResults = array_slice($Results,$offset,5);
+        return response()->json(['count'=> $count, 'result'=>$finalResults]);
     }
 
     private function filterByOrg($org_ids){

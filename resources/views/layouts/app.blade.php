@@ -13,8 +13,8 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/my-css.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <!-- Scripts -->
@@ -28,7 +28,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="nav navbar-static-top navbar">
             <div class="container">
                 <div class="navbar-header">
 
@@ -48,9 +48,6 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -85,6 +82,10 @@
         </nav>
 
         @yield('content')
+
+        <div class="jumbotron-fluid text-center" style="padding-top: 20px; padding-bottom: 30px; background: #e5e5e5; margin-top: 10px">
+            <h3>All Rights belong to Amirkabir University of Technology</h3>
+        </div>
     </div>
 
     <!-- Scripts -->

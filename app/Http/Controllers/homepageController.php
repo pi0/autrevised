@@ -17,7 +17,13 @@ class homepageController extends Controller
         $fields = $this->getFields();
         $categories = $this->getCategories();
         $organizations = $this->getOrganizations();
-        return view('homepage')->with(compact('funds', 'countries', 'fields', 'categories', 'organizations'));
+        $count = [];
+        $i = 1;
+        foreach ($funds as $f){
+            array_push($count, $i);
+            $i++;
+        }
+        return view('homepage')->with(compact('funds', 'countries', 'fields', 'categories', 'organizations', 'count'));
     }
 
     private function getFunds(){

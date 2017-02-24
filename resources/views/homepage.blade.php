@@ -4,104 +4,93 @@
 @extends('layouts.app')
 
 @section('content')
-<h3>Funds </h3>
-<ul>
-    @foreach($funds as $fund)
-        <li>
-            {{$fund->name}}
-        </li>
-    @endforeach
-</ul>
-
-<h3>countries </h3>
-<ul>
-    @foreach($countries as $country)
-        <li>
-            {{$country->name}}
-        </li>
-    @endforeach
-</ul>
-
-
-<h3>Organizations </h3>
-<ul>
-    @foreach($organizations as $org)
-        <li>
-            {{$org->name}} - {{$org->country->name}}
-        </li>
-    @endforeach
-</ul>
-
-<h3>Fields </h3>
-<ul>
-    @foreach($fields as $field)
-        <li>
-            {{$field->title}}
-        </li>
-    @endforeach
-</ul>
 
 
 <div class="container my-whole-page">
     <div class="row">
         <div class="container-fluid filter_res col-lg-4 col-sm-4">
             <h2 class="title">Filters</h2>
-            <ul class="panel-group">
-                <li class="list-group-item side-list">
-                    <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
-                    <span class="list-span">Category</span>
+            <ul class="nav nav-pills flex-column">
+                <div class="btn btn-success" id="resetFilters">Reset all</div>
+                <li class="nav-item">
+                    <a data-toggle="collapse" href="#categoryPan" id="Category">
+                        <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
+                        <span class="list-span">Category</span>
+                    </a>
                 </li>
-                <li class="list-group-item side-list">
-                    <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
-                    <span class="list-span">Funding Organization</span>
-                </li>
+                <div class="collapse" id="categoryPan">
+                    <ul class="nav nav-pills flex-column nav-stacked my-stack" id="CategoryFilter">
+                        @foreach($categories as $category)
+                            <li id="{{$category->id}}">
+                                <a class="my-pill nav-link myCategory">{{$category->real}} - {{$category->description}}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
 
-                <li>
-                    <a data-toggle="collapse" href="#countryPan" class="list-group-item side-list" id="Country">
+
+                <li class="nav-item">
+                    <a data-toggle="collapse" href="#orgPan"  id="Organization">
+                        <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
+                        <span class="list-span">Funding Organization</span>
+                    </a>
+                </li>
+                <div class="collapse" id="orgPan">
+                    <ul class="nav nav-pills nav-stacked my-stack flex-column" id="OrgFilter">
+                        @foreach($organizations as $organization)
+                            <li id="{{$organization->id}}">
+                                <a class="my-pill nav-link myOrganization">{{$organization->name}} - {{$organization->country->name}}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+
+                <li class="nav-item">
+                    <a data-toggle="collapse" href="#countryPan" id="Country">
                         <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
                         <span class="list-span">Country</span>
                     </a>
                 </li>
-                <div class="panel-collapse collapse" id="countryPan">
-                    <ul class="list-group nav nav-pills nav-stacked my-stack" id="CountryFilter" style="display: none">
+                <div class="collapse" id="countryPan">
+                    <ul class="nav nav-pills nav-stacked my-stack flex-column" id="CountryFilter">
                         @foreach($countries as $country)
-                            <li id="{{$country->id}}">
-                                <a class="my-pill" href="#">{{$country->name}}</a>
+                            <li id="{{$country->id}}" class="nav-item">
+                                <a class="my-pill nav-link myCountry" >{{$country->name}}</a>
                             </li>
                         @endforeach
                     </ul>
                 </div>
 
-                <li data-toggle="collapse" href="#resPan" class="list-group-item side-list" id="ResearchArea">
-                    <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
-                    <span class="list-span">Research Area</span>
-
-
+                <li class="nav-item">
+                    <a data-toggle="collapse" href="#researchPan"  id="Research">
+                        <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
+                        <span class="list-span">Research Area</span>
+                    </a>
                 </li>
-                <div class="panel-collapse collapse" id="resPan">
-                    <ul class="list-group nav nav-pills nav-stacked my-stack" id="ResearchAreaOpen" style="display: none">
+                <div class="collapse" id="researchPan">
+                    <ul class="nav nav-pills flex-column nav-stacked my-stack" id="ResearchFilter">
                         @foreach($fields as $field)
-                            <li id="{{$field->id}}" class="list-group-item">
-                                <a class="my-pill" href="#">{{$field->title}}</a>
+                            <li id="{{$field->id}}">
+                                <a class="my-pill nav-link myField">{{$field->title}}</a>
                             </li>
                         @endforeach
                     </ul>
                 </div>
+
+
             </ul>
         </div>
         <div class="container-fluid col-sm-7 col-lg-7">
 
-            <input class="form-control my-input" placeholder="Search..." type="search">
+            <input class="form-control my-input" placeholder="Search..." type="search" id="searchbox">
             <div class="container-fluid filter_res" style="margin: 15px 0 15px 0;">
                 <h2 class="title">Search Results</h2>
                 <div class="well">
-                    <ul class="nav-tabs nav">
-                        <li class="tabs-border"><a class="my-tabs" href="#home" aria-expanded="true" data-toggle="tab">DAAD</a></li>
-                        <li class="tabs-border"><a class="my-tabs" href="#profile" data-toggle="tab">Fraunhofer</a></li>
-                        <li class="tabs-border"><a class="my-tabs" href="#" data-toggle="tab">AVH</a></li>
-                        <li class="tabs-border"><a class="my-tabs" href="#" data-toggle="tab">MPG</a></li>
-                        <li class="tabs-border"><a class="my-tabs" href="#" data-toggle="tab">Test</a></li>
-                    </ul>
+                    {{--<ul class="nav-tabs nav" id="tabPlace">--}}
+                        {{--@foreach($organizations as $org)--}}
+                        {{--<li class="tabs-border nav-item tabItem"><a class="my-tabs" href="#{{$org->name}}" aria-expanded="true" data-toggle="tab">{{$org->name}}</a></li>--}}
+                        {{--@endforeach--}}
+                    {{--</ul>--}}
 
 
                     <div id="myTabContent" class="tab-content">
@@ -109,25 +98,27 @@
                         <!--<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>-->
                         <!--</div>-->
 
-                        <ul class="list-group tab-pane active" style="margin-top: 10px">
-                            <li class="list-group-item my-list">
-                                <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
-                                <span class="list-span">Study Visits by Groups of Foreign Students</span>
-                            </li>
-                            <li class="list-group-item my-list">
-                                <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
-                                <span class="list-span">Re-invitation programme for former scholarship holders</span>
-                            </li>
+                        <ul class="list-group tab-pane active" id="list" style="margin-top: 10px">
+                            @foreach($funds as $fund)
+                                <li id="{{$fund->id}}" class="list-group-item my-list fundItem">
+                                    <a style="text-decoration: none; color: inherit" data-toggle="collapse" href="#description-{{$fund->id}}" >
+                                        <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
+                                        <span class="list-span">{{$fund->name}}</span>
+                                    </a>
+                                    <div class="collapse pull-right description" id="description-{{$fund->id}}">
+                                            {{$fund->farsi}}
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
+
                     </div>
-                    <div class="text-center">
-                        <ul class="pagination">
+                    <div>
+                        <ul class="pagination justify-content-center">
                             <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                            @foreach($count as $num)
+                                <li><a class="pp">{{$num}}</a></li>
+                            @endforeach
                             <li><a href="#">&raquo;</a></li>
                         </ul>
                     </div>

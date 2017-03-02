@@ -2,29 +2,31 @@
 
 @section('content')
     <script>
-
         $(document).ready(function () {
-            $("#newFund").click(function () {
+            $("#sub").click(function (event) {
+                event.preventDefault();
                 var name = $("#name").val();
+                var email = $("#email").val();
+                var password = $("#password").val();
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
                 $.ajax({
-                    url: `/newFund`,
+                    url: `/adminPanel`,
                     type: 'post',
                     dataType: 'html',
                     data: {
-                        _token: CSRF_TOKEN, name: name
+                        _token: CSRF_TOKEN, name: name, email:email, password:password
                     }
                 })
                     .done(function (data) {
                         $.notify({
                             title: '<strong>Fund Created</strong>',
-                            message: 'Fund successfully created.'
+                            message: 'Fund successfully created. '+data
                         },{
                             type: 'success'
                         });
                         setTimeout(function () {
-                            window.location.href = `/fund/${data}`;
+                            location.reload();
                         }, 1000);
                     })
                     .fail(function () {
@@ -41,11 +43,32 @@
     </script>
 
 
-    <div class="container" style="height: 70vh">
-        <div class="card p-4 mt-4" style="top: 30%">
-            <h3 class="text-center">Enter a name for your new fund</h3>
-            <input class="form-control" id="name" placeholder="Name">
-            <button id="newFund" class="btn btn-success btn-lg mt-4">Let's Go!</button>
+
+    <div class="container m-4">
+        <div class="list-group">
+            @foreach($users as $user)
+                <div class="list-group-item">{{$user->id}} - {{$user->name}}</div>
+            @endforeach
+        </div>
+
+        <div class="card p-3">
+            <form class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control" type="text" id="name">
+
+                <label for="email">Email</label>
+                <input class="form-control" type="email" id="email">
+
+
+                <label for="password">password</label>
+                <input class="form-control" type="password" id="password">
+
+                <button class="btn btn-info" id="sub">
+                    Register
+                </button>
+
+            </form>
         </div>
     </div>
+
 @endsection

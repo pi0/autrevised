@@ -24,8 +24,23 @@ class fundController extends Controller
         foreach ($r->categories as $category)
             $fund->tags()->attach(tag::find($category));
         $fund->organization()->associate(organization::find($r->organization));
-        dd($fund);
+
         return redirect('/addFund');
+    }
+
+    public function newFund(Request $r){
+        $fund = new fund();
+        $fund->name = $r->name;
+        $fund->rating = 1;
+        $fund->farsi = 'این  فاند ناقص است';
+        $fund->comments = 'این  فاند ناقص است';
+        $fund->organization_id = organization::first()->id;
+        $fund->description = 'Empty fund';
+        $fund->save();
+        $fund->fields()->attach(field::find(1));
+        $fund->tags()->attach(tag::find(1));
+        $fund->organization()->associate(organization::find(1));
+        return $fund->id;
     }
 
 

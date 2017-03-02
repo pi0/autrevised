@@ -4,10 +4,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <script>
 
+    </script>
 
 <div class="container my-whole-page">
-    <div class="row">
+    <div class="row pl-3">
         <div class="container-fluid filter_res col-lg-4 col-sm-4">
             <h2 class="title">Filters</h2>
             <ul class="nav nav-pills flex-column">
@@ -80,23 +82,18 @@
 
             </ul>
         </div>
-        <div class="container-fluid col-sm-7 col-lg-7">
+        <div class="container-fluid col-sm-8 col-lg-8">
 
             <input class="form-control my-input" placeholder="Search..." type="search" id="searchbox">
-            <div class="container-fluid filter_res" style="margin: 15px 0 15px 0;">
+            <div class="container-fluid filter_res p-sm-3" style="margin: 15px 0 15px 0;">
                 <h2 class="title">Search Results</h2>
-                <div class="well">
-                    {{--<ul class="nav-tabs nav" id="tabPlace">--}}
-                        {{--@foreach($organizations as $org)--}}
-                        {{--<li class="tabs-border nav-item tabItem"><a class="my-tabs" href="#{{$org->name}}" aria-expanded="true" data-toggle="tab">{{$org->name}}</a></li>--}}
-                        {{--@endforeach--}}
-                    {{--</ul>--}}
+                <hr>
+                <nav class="card">
 
 
-                    <div id="myTabContent" class="tab-content">
-                        <!--<div class="tab-pane active" id="home">-->
-                        <!--<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>-->
-                        <!--</div>-->
+
+                    <div id="myTabContent" class="tab-content p-sm-3">
+
 
                         <ul class="list-group tab-pane active" id="list" style="margin-top: 10px">
                             @foreach($funds as $fund)
@@ -109,22 +106,24 @@
                                     </a>
                                     <div class="collapse pull-right description" id="description-{{$fund->id}}">
                                             {{$fund->farsi}}
+                                        @if(!\Illuminate\Support\Facades\Auth::guest())
                                             <a href="fund/{{$fund->id}}" class="btn btn-sm btn-success pull-left">Edit</a>
+                                        @endif
                                     </div>
                                 </li>
                             @endforeach
                         </ul>
 
                     </div>
-                    <div>
+                    <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center">
-                            <li><a href="#">&laquo;</a></li>
+                            <li class="page-item"><a class="page-link">&laquo;</a></li>
                             @foreach($count as $num)
-                                <li><a class="pp">{{$num}}</a></li>
+                                <li class="page-item"><a class="page-link">{{$num}}</a></li>
                             @endforeach
-                            <li><a href="#">&raquo;</a></li>
+                            <li class="page-item"><a class="page-link">&raquo;</a></li>
                         </ul>
-                    </div>
+                    </nav>
                 </div>
             </div>
         </div>

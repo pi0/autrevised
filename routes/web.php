@@ -90,15 +90,11 @@ Route::get('/addCategory', function (){
 
 Route::put('/fund', 'fundController@add');
 Route::patch('/fund/{id}', 'fundController@update');
-Route::get('/fund/{id}', 'fundController@show');
+Route::get('/fund/{id}', 'fundController@show')->middleware('auth');
 Route::delete('/fund/{id}', 'fundController@del');
-
+Route::post('/newFund', 'fundController@newFund');
 Route::get('/addFund', function (){
-    $fund = \App\fund::find(1);
-    $organizations = \App\organization::with('country')->get();
-    $fields = \App\field::all();
-    $categories = \App\tag::all();
-    return view('addFund')->with(compact('fund', 'organizations', 'fields', 'categories'));
+    return view('addFund');
 });
 
 
@@ -110,6 +106,12 @@ Route::get('/addFund', function (){
 Route::get('/import', 'importController@show');
 Route::post('/import', 'importController@import');
 
+
+//----------------------------------------------
+#               Admin Routes
+//----------------------------------------------
+Route::get('adminPanel', 'adminController@show');
+Route::post('adminPanel', 'adminController@register');
 
 
 

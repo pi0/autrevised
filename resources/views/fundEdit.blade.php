@@ -376,10 +376,10 @@
         </div>
 
         <div class="container-fluid col-sm-9 col-lg-9">
-            <div class="container-fluid filter_res p-3" style="margin: 15px 0 15px 0;">
+            <div  class="container-fluid filter_res p-3" style="margin: 15px 0 15px 0;">
                 <h2 class="title">Edit Fund</h2>
                 <hr>
-                <div class="card p-2">
+                <div id="mainPanel" class="card p-2">
                     <div class="form-group">
                         <label class="control-label" for="name"><strong>Fund name:</strong></label>
                         <input class="form-control field" placeholder="For example Postdoctoral Researchers’ Networking Tour …" type="text" id="name" value="{{$selectedfund->name}}">

@@ -118,7 +118,7 @@ $("#searchbox").on('keypress', function (event) {
    }
 });
 
-$(".pp").on('click', onPage);
+$(".page-link").on('click', onPage);
 
 function onPage(event) {
     event.preventDefault();
@@ -163,7 +163,7 @@ function refreshFunds(res) {
 
     $('.pagination').empty();
     for(var u=0; u<=count; u++){
-        var page = $('<li><a href="#"></a></li>');
+        var page = $('<li class="page-item"><a class="page-link"></a></li>');
         $(page).find('a').html(u+1);
         $(page).find('a').on('click', onPage);
         $('.pagination').append(page);

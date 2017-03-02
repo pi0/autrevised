@@ -10,15 +10,15 @@
     <script src="{{asset('js/jquery.js')}}"></script>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link href="{{asset('css/select2.min.css')}}" rel="stylesheet" />
+    <script src="{{asset('js/select2.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap-notify.js')}}"></script>
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/my-css.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <!-- Scripts -->
-    <script !src="{{asset('js/bootstrap.js')}}"></script>
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -89,6 +89,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="{{asset('js/bootstrap.js')}}"></script>
 </body>
 </html>

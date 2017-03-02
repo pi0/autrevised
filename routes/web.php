@@ -91,6 +91,8 @@ Route::get('/addCategory', function (){
 Route::put('/fund', 'fundController@add');
 Route::patch('/fund/{id}', 'fundController@update');
 Route::get('/fund/{id}', 'fundController@show');
+Route::delete('/fund/{id}', 'fundController@del');
+
 Route::get('/addFund', function (){
     $fund = \App\fund::find(1);
     $organizations = \App\organization::with('country')->get();
@@ -109,6 +111,5 @@ Route::get('/import', 'importController@show');
 Route::post('/import', 'importController@import');
 
 
-Route::get('/page1', function(){
-   return view('1page');
-});
+
+

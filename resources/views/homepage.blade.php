@@ -103,10 +103,13 @@
                                 <li id="{{$fund->id}}" class="list-group-item my-list fundItem">
                                     <a style="text-decoration: none; color: inherit" data-toggle="collapse" href="#description-{{$fund->id}}" >
                                         <i class="fa fa-caret-right" style="font-size: 25px" aria-hidden="true"></i>
-                                        <span class="list-span">{{$fund->name}}</span>
+                                        <span class="list-span">
+                                            {{$fund->name}}
+                                        </span>
                                     </a>
                                     <div class="collapse pull-right description" id="description-{{$fund->id}}">
                                             {{$fund->farsi}}
+                                            <a href="fund/{{$fund->id}}" class="btn btn-sm btn-success pull-left">Edit</a>
                                     </div>
                                 </li>
                             @endforeach

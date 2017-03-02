@@ -154,7 +154,10 @@ function refreshFunds(res) {
         $(item).find('span').html(el.name);
         $(item).find('a').attr('href','#description-' + el.id);
         $(item).find('div').attr('id', 'description-' + el.id);
-        $(item).find('div').html(el.farsi);
+        var editLink  = $(item).find("div a");
+        $(item).find('div').text(el.farsi);
+        editLink.attr('href','fund/'+el.id);
+        $(item).find('div').append(editLink);
         $('#list').append(item);
     }
 
@@ -169,4 +172,3 @@ function refreshFunds(res) {
     $("#list").collapse();
 
 }
-

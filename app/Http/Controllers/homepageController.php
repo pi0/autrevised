@@ -11,6 +11,25 @@ use Illuminate\Http\Request;
 
 class homepageController extends Controller
 {
+
+    public function sho(){
+        $funds = $this->getFunds();
+        $countries = $this->getCountries();
+        $fields = $this->getFields();
+        $categories = $this->getCategories();
+        $organizations = $this->getOrganizations();
+        $count = [];
+        $i = 1;
+        foreach ($funds as $f){
+            array_push($count, $i);
+            $i++;
+        }
+        return view('2page')->with(compact('funds', 'countries', 'fields', 'categories', 'organizations', 'count'));
+    }
+
+
+
+
     public function show(){
         $funds = $this->getFunds();
         $countries = $this->getCountries();
@@ -25,6 +44,8 @@ class homepageController extends Controller
         }
         return view('homepage')->with(compact('funds', 'countries', 'fields', 'categories', 'organizations', 'count'));
     }
+
+
 
     private function getFunds(){
         return fund::all()->take(10);

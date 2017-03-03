@@ -95,7 +95,14 @@ $(document).ready(function () {
             }
         })
             .done(function (data) {
-
+                if(data == 'no'){
+                    $.notify({
+                        title: '<strong>Deleting country failed</strong>',
+                        message: 'This country cannot be deleted because it has some funds attached to it.'
+                    },{
+                        type: 'danger'
+                    });
+                } else {
                     $.notify({
                         title: '<strong>Country Deleted</strong>',
                         message: 'Country successfully deleted.'
@@ -105,7 +112,7 @@ $(document).ready(function () {
                     setTimeout(function () {
                         location.reload();
                     }, 1000);
-
+                }
             })
             .fail(function () {
                 console.log("error");

@@ -14,6 +14,9 @@ class countryController extends Controller
     }
 
     public function delete($id){
+        $funds = country::find($id)->funds;
+        if(!$funds->isEmpty())
+            return 'no';
         country::destroy($id);
         return redirect('/addCountry');
     }

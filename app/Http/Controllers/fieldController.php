@@ -14,8 +14,15 @@ class fieldController extends Controller
     }
 
     public function delete($id){
-        if(!field::find($id)->funds->isEmpty())
-            return 'no';
+        $funds = field::find($id)->funds;
+        if(!$funds->isEmpty()){
+            foreach ($funds as $fund)
+            {
+                if($fund->fields->count() == 1)
+                    return 'no';
+
+            }
+        }
         field::destroy($id);
         return redirect('/addField');
     }

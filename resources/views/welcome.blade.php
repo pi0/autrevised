@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>AUT Fund Management System</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -69,25 +69,40 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        @if(Auth::user()->is_admin)
+                            <a href="{{ url('/adminPanel') }}">Homepage</a>
+                            <a href="{{ url('/logout') }}"
+                               onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        @else
+                            <a href="{{ url('/homepage') }}">Homepage</a>
+                        @endif
                     @else
                         <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
                     @endif
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    AUT Fund System
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    @if (Route::has('login'))
+                            @if (Auth::check())
+                                <a class="btn btn-primary" href="{{url('/Import')}}">Import</a>
+                                <a class="btn btn-primary" href="{{url('/New')}}">New</a>
+                            @else
+                        <a class="btn btn-primary" href="{{url('/login')}}">Login</a>
+                            @endif
+                    @endif
+                    <a class="btn btn-primary" href="{{url('/Search')}}">Search</a>
                 </div>
             </div>
         </div>

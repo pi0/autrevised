@@ -42,10 +42,13 @@
 
 
     <div class="container" style="height: 70vh">
-        <div class="card p-4 mt-4" style="top: 30%">
-            <h3 class="text-center">Enter a name for your new fund</h3>
-            <input class="form-control" id="name" placeholder="Name">
-            <button id="newFund" class="btn btn-success btn-lg mt-4">Let's Go!</button>
+        <div class="card p-0 mt-4 list-group" style="top: 30%">
+            <h3 class="list-group-item active m-0">New Fund</h3>
+            <div class="p-4 text-center">
+                <h4 class="text-left">Enter a name for your new fund</h4>
+                <input class="form-control" id="name" placeholder="Name">
+                <button id="newFund" class="btn btn-success btn-lg mt-4">Let's Go!</button>
+            </div>
         </div>
     </div>
 @endsection

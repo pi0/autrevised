@@ -151,13 +151,14 @@ function refreshFunds(res) {
     for(var i=0; i<data.length; i++) {
         var el = data[i];
         var item = $(document.fundItem).clone();
-        $(item).find('span').html(el.name);
+        $(item).find('.list-span').html(el.name);
         $(item).find('a').attr('href','#description-' + el.id);
         $(item).find('div').attr('id', 'description-' + el.id);
-        var editLink  = $(item).find("div a");
+        var editViewLinks  = $(item).find("#editViewLinks");
         $(item).find('div').text(el.farsi);
-        editLink.attr('href','fund/'+el.id);
-        $(item).find('div').append(editLink);
+        $(editViewLinks).find('.editLink').attr('href','fund/'+el.id);
+        $(editViewLinks).find('.viewLink').attr('href','fund/'+el.id);
+        $(item).find('div').append(editViewLinks);
         $('#list').append(item);
     }
 

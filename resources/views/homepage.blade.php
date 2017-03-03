@@ -106,9 +106,13 @@
                                     </a>
                                     <div class="collapse pull-right description" id="description-{{$fund->id}}">
                                             {{$fund->farsi}}
-                                        @if(!\Illuminate\Support\Facades\Auth::guest())
-                                            <a href="fund/{{$fund->id}}" class="btn btn-sm btn-success pull-left">Edit</a>
-                                        @endif
+                                        <span id="editViewLinks" class="pull-left m-3">
+                                          @if(!\Illuminate\Support\Facades\Auth::guest())
+                                                <a href="fund/{{$fund->id}}" class="btn btn-sm btn-success ml-1 editLink">Edit</a>
+                                            @endif
+                                            <a href="fund/{{$fund->id}}" class="btn btn-sm btn-primary pull-left viewLink">View</a>
+                                        </span>
+
                                     </div>
                                 </li>
                             @endforeach

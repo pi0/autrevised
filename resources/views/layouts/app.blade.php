@@ -63,22 +63,31 @@
                     </li>
                 @else
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a href="{{ url('/logout') }}"
-                               onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                                Logout
+                    {{--<li class="nav-item dropdown">--}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                {{ Auth::user()->name }}
                             </a>
+                        </li>
+                        {{--<ul class="dropdown-menu p-2" aria-labelledby="navbarDropdownMenuLink">--}}
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/logout') }}"
+                                   onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+                            </li>
+                            @if(Auth::user()->is_admin)
+                                <li class="nav-item col-sm-8 mr-3">
+                                    <a class="nav-link" href="{{url('/adminPanel')}}">Admin Panel</a>
+                                </li>
+                            @endif
 
                             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                             </form>
-                        </div>
-                    </li>
+                        {{--</ul>--}}
+                    {{--</li>--}}
                 @endif
             </ul>
 

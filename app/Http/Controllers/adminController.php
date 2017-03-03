@@ -19,6 +19,25 @@ class adminController extends Controller
         return view('adminPanel')->with(compact('users'));
     }
 
+    public function setUnsetAdmin($id, Request $r){
+        $user = User::find($id);
+        if($r->set == 1){
+            $user->is_admin = 1;
+            $user->save();
+        } elseif($r->set == 0) {
+            $user->is_admin = 0;
+            $user->save();
+        }
+        return redirect('/adminPanel');
+    }
+
+
+    public function deleteUser($id){
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/adminPanel');
+    }
+
 
     public function register(Request $r){
         $credentials = ['name'=>$r->name, 'email'=>$r->email, 'password'=>$r->password];

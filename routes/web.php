@@ -110,8 +110,10 @@ Route::post('/import', 'importController@import');
 //----------------------------------------------
 #               Admin Routes
 //----------------------------------------------
-Route::get('adminPanel', 'adminController@show');
-Route::post('adminPanel', 'adminController@register');
+Route::get('adminPanel', 'adminController@show')->middleware('admin');
+Route::post('adminPanel', 'adminController@register')->middleware('admin');
+Route::post('/users/{id}', 'adminController@setUnsetAdmin')->middleware('admin');
+Route::delete('/users/{id}', 'adminController@deleteUser')->middleware('admin');
 
 
 

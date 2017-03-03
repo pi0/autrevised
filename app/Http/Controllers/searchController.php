@@ -37,9 +37,16 @@ class searchController extends Controller
             $country_ids = $filter['$country_ids'];
         else
             $country_ids = [];
+
+        if(isset($filter['$text']))
+            $text = $filter['$text'];
+        else
+            $text = "";
+
         $ratings = [];
 
-        $filteredByOrgs = $this->filterByOrg($org_ids);
+        $filteredByText = $this->searchByText($text);
+        $filteredByOrgs = $this->filterByOrg($filteredByText, $org_ids);
         $filteredByOrgsNFields = $this->filterByField($filteredByOrgs, $field_ids);
         $filteredByOrgFieldTag = $this->filterByTag($filteredByOrgsNFields, $tag_ids);
         $filteredByOrgFieldTagCountry = $this->filterByCountry($filteredByOrgFieldTag, $country_ids);
@@ -50,21 +57,18 @@ class searchController extends Controller
         return response()->json(['count'=> $count, 'result'=>$finalResults]);
     }
 
-    private function filterByOrg($org_ids){
+    private function filterByOrg($before, $org_ids){
 
+        if(empty($org_ids))
+            return $before;
         $res = array();
-        if(empty($org_ids)){
-            foreach (fund::all() as $fund)
-                array_push($res, $fund->id);
-            return $res;
-        }
-
         $tmp = organization::find($org_ids);
         foreach ($tmp as $t){
             foreach ($t->funds as $fund)
-                array_push($res, $fund->id);
+                if(in_array($fund->id, $before))
+                     array_push($res, $fund->id);
         }
-        return $res;
+        return array_unique($res);
     }
 
 
@@ -120,6 +124,29 @@ class searchController extends Controller
                     array_push($res, $fund->id);
         }
 
+        return $res;
+    }
+
+
+    private function searchByText($searchString){
+        $res = array();
+        if(empty($searchString)){
+            foreach (fund::all() as $fund)
+                array_push($res, $fund->id);
+            return $res;
+        }
+        $searchText = '%'.$searchString.'%';
+        $funds = fund::where('name', 'like', $searchText)
+                       ->orWhere('duration', 'like', $searchText)
+                       ->orWhere('financial', 'like', $searchText)
+                       ->orWhere('deadline', 'like', $searchText)
+                       ->orWhere('farsi', 'like', $searchText)
+                       ->orWhere('memo', 'like', $searchText)
+                       ->orWhere('comments', 'like', $searchText)
+                       ->orWhere('description', 'like', $searchText)
+                       ->get();
+        foreach ($funds as $fund)
+                array_push($res, $fund->id);
         return $res;
     }
 

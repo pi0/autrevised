@@ -26,10 +26,10 @@
     </script>
 
 </head>
-<body>
-    <div id="app">
+<body style="background: #eef2f6">
+    <div id="app" class="pb-5">
 
-        <nav class="navbar navbar-toggleable-md navbar-light bg-faded mb-3">
+        <nav id="mainNabvar" class="navbar navbar-toggleable-md navbar-light bg-faded mb-3" style="background: #276bb0;">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -57,9 +57,6 @@
                 @if (Auth::guest())
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ url('/login') }}">Login<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/register') }}">Register</a>
                     </li>
                 @else
 
@@ -95,10 +92,6 @@
 
 
         @yield('content')
-
-        <div class="jumbotron-fluid text-center" style="padding-top: 20px; padding-bottom: 30px; background: #e5e5e5; margin-top: 10px">
-            <h3>All Rights belong to Amirkabir University of Technology</h3>
-        </div>
     </div>
 
     <!-- Scripts -->

@@ -33,42 +33,21 @@ $("[data-toggle *= 'collapse']").click(function(){
     }
 });
 
-$(".my-pill").click(function () {
-    var myID = parseInt($(this).parent().attr('id'));
+$(".List").change(function () {
+
     document.offset = 0;
-    console.log(myID);
-    if (!$(this).hasClass("active")){
-        if($(this).hasClass("myCategory")){
-            document.filters.$tag_ids.push(myID);
-        } else if($(this).hasClass("myField")){
-            document.filters.$field_ids.push(myID);
-        } else if($(this).hasClass("myCountry")){
-            document.filters.$country_ids.push(myID);
-        } else if($(this).hasClass("myOrganization")){
-            document.filters.$org_ids.push(myID);
-        }
-        $(this).addClass("active");
-    }
-    else {
-        if($(this).hasClass("myCategory")){
-            var index = document.filters.$tag_ids.indexOf(myID);
-            if(index > -1)
-                document.filters.$tag_ids.splice(index, 1);
-        } else if($(this).hasClass("myField")){
-            var index = document.filters.$field_ids.indexOf(myID);
-            if(index > -1)
-                document.filters.$field_ids.splice(index, 1);
-        } else if($(this).hasClass("myCountry")){
-            var index = document.filters.$country_ids.indexOf(myID);
-            if(index > -1)
-                document.filters.$country_ids.splice(index, 1);
-        } else if($(this).hasClass("myOrganization")){
-            var index = document.filters.$org_ids.indexOf(myID);
-            if(index > -1)
-                document.filters.$org_ids.splice(index, 1);
-        }
-        $(this).removeClass("active");
-    }
+    var id = $(this).attr('id');
+    var value = $(this).val();
+    console.log(id);
+    if(id == 'CategoryFilter')
+        document.filters.$tag_ids = value;
+    else if(id == 'OrgFilter')
+        document.filters.$org_ids = value;
+    else if(id == 'CountryFilter')
+        document.filters.$country_ids = value;
+    else if(id == 'ResearchFilter')
+        document.filters.$field_ids = value;
+
     console.log(document.filters);
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
@@ -91,22 +70,25 @@ $(".my-pill").click(function () {
 
 
 $("#searchbox").on('keypress', function (event) {
-    document.offset = 1;
+    document.offset = 0;
    if(event.which == 13)
    {
        event.preventDefault();
-       var filter = $(this).val();
+       var $text = '';
+       if($(this).val())
+           $text = $(this).val();
+       document.filters.$text = $text;
        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
        $.ajax({
            url: '/search',
            type: 'post',
            dataType: 'html',
-           data: {_token: CSRF_TOKEN, filter: filter, offset: document.offset
+           data: {_token: CSRF_TOKEN, filter: document.filters, offset: document.offset
            }
        })
            .done(function(data) {
               console.log('success');
-
+               refreshFunds(data);
            })
            .fail(function() {
                console.log("error");
@@ -122,6 +104,9 @@ $(".page-link").on('click', onPage);
 
 function onPage(event) {
     event.preventDefault();
+    var me = event.target;
+    $(".page-link").parent().removeClass('active');
+    $(me).parent().addClass('active');
     document.offset = parseInt($(this).html())-1;
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     $.ajax({
@@ -157,7 +142,7 @@ function refreshFunds(res) {
         var editViewLinks  = $(item).find("#editViewLinks");
         $(item).find('div').text(el.farsi);
         $(editViewLinks).find('.editLink').attr('href','fund/'+el.id);
-        $(editViewLinks).find('.viewLink').attr('href','fund/'+el.id);
+        $(editViewLinks).find('.viewLink').attr('href','show/fund/'+el.id);
         $(item).find('div').append(editViewLinks);
         $('#list').append(item);
     }
@@ -165,8 +150,11 @@ function refreshFunds(res) {
     $('.pagination').empty();
     for(var u=0; u<=count; u++){
         var page = $('<li class="page-item"><a class="page-link"></a></li>');
-        $(page).find('a').html(u+1);
-        $(page).find('a').on('click', onPage);
+        var anch = $(page).find('a');
+        $(anch).html(u+1);
+        $(anch).on('click', onPage);
+        if(u == document.offset)
+            $(anch).parent().addClass('active');
         $('.pagination').append(page);
     }
 

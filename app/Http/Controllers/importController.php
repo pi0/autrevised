@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\country;
 use App\field;
 use App\fund;
 use App\organization;
@@ -13,14 +14,17 @@ class importController extends Controller
 {
     public function show(){
         $organizations = organization::with('country')->get();
-        return view('importPage')->with(compact('organizations'));
+        $countries = country::all();
+        return view('importPage')->with(compact('organizations', 'countries'));
     }
 
     public function import(Request $r){
-        $r->file('f')->storeAs('excels', $r->name .'.xlsx');
+        $storedName = $r->name .'.xlsx';
+        $r->file('f')->storeAs('excels', $storedName);
         $organization = $r->organization;
-        Excel::load('storage\app\excels\DAAD.xlsx', function($reader) use($organization){
-            $sheets = $reader->skip(1)->take(3);
+        $pathReal = 'storage\\app\\excels\\'.$storedName;
+        Excel::load($pathReal, function($reader) use($organization){
+            $sheets = $reader;
             $initRead = $this->InitialRead($sheets);
             $this->FundTableInit($initRead, $organization);
         });
@@ -29,7 +33,7 @@ class importController extends Controller
 
 
     private function InitialRead($sheets){
-        for ($sh = 1; $sh <= $sheets->getSheetCount()-1; $sh++){
+        for ($sh = 0; $sh <= $sheets->getSheetCount()-1; $sh++){
 
             $sheet = $sheets->getSheet($sh);
 
@@ -104,7 +108,7 @@ class importController extends Controller
 
     private function FundTableInit($tmpData, $organization)
     {
-        for ($u = 1; $u < count($tmpData); $u++) { #iterate in order to execute queries
+        for ($u = 0; $u < count($tmpData); $u++) { #iterate in order to execute queries
 
             $name = addslashes($tmpData[$u]['fund_name']);
             $description = addslashes($tmpData[$u]['fund_program_description']);
@@ -142,7 +146,7 @@ class importController extends Controller
                 $fund->name = 'NoDescription';
                 $fund->comments .= ' ERROR-NO Description';
             }
-            if(empty($rating)){
+            if(empty($rating) || !is_numeric($rating)){
                 $fund->rating = 1;
                 $fund->comments .= ' ERROR-NO Rating';
             }

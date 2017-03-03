@@ -31,7 +31,7 @@
 
 <div class="container my-whole-page">
     <div class="row pl-3">
-        <div class="container-fluid filter_res col-lg-3 col-sm-3">
+        <div class="card p-3 mt-3 col-lg-3 col-sm-3">
             <h2 class="title">Add</h2>
             <ul class="nav nav-pills flex-column mb-sm-4">
 
@@ -375,14 +375,14 @@
 
         </div>
 
-        <div class="container-fluid col-sm-9 col-lg-9">
-            <div  class="container-fluid filter_res p-3" style="margin: 15px 0 15px 0;">
+        <div class=" col-sm-9 col-lg-9">
+            <div  class="card p-3" style="margin: 15px 0 15px 0;">
                 <h2 class="title">Edit Fund</h2>
                 <hr>
-                <div id="mainPanel" class="card p-2">
+                <div id="mainPanel" class="card p-3">
                     <div class="form-group">
                         <label class="control-label" for="name"><strong>Fund name:</strong></label>
-                        <input class="form-control field" placeholder="For example Postdoctoral Researchers’ Networking Tour …" type="text" id="name" value="{{$selectedfund->name}}">
+                        <input class="form-control field" placeholder="For example Postdoctoral Researchers’ Networking Tour …" type="text" id="name" value="{{stripslashes($selectedfund->name)}}">
                     </div>
 
                     <div class="form-group">
@@ -454,27 +454,27 @@
 
                     <div class="form-group">
                         <label class="control-label" for="description"><strong>Description:</strong></label>
-                        <textarea class="form-control align-middle field" name="formDescription" id="description" cols="30" rows="10" placeholder="Describe everything about this fund">{{$selectedfund->description}}</textarea>
+                        <textarea class="form-control align-middle field" name="formDescription" id="description" cols="30" rows="10" placeholder="Describe everything about this fund">{{stripslashes($selectedfund->description)}}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label" for="duration"><strong>Duration:</strong></label>
-                        <textarea class="form-control align-middle field" name="formDuration" id="duration" rows="2" placeholder="Describe everything about duration">{{$selectedfund->duration}}</textarea>
+                        <textarea class="form-control align-middle field" name="formDuration" id="duration" rows="2" placeholder="Describe everything about duration">{{stripslashes($selectedfund->duration)}}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label" for="financial"><strong>Financial Support:</strong></label>
-                        <textarea class="form-control align-middle field" name="formFinancial" id="financial" rows="2" placeholder="Describe everything about financial support">{{$selectedfund->financial}}</textarea>
+                        <textarea class="form-control align-middle field" name="formFinancial" id="financial" rows="2" placeholder="Describe everything about financial support">{{stripslashes($selectedfund->financial)}}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label" for="requirements"><strong>Requirements:</strong></label>
-                        <textarea class="form-control align-middle field" name="formRequirements" id="requirements" rows="5" placeholder="Describe everything about requirements">{{$selectedfund->requirements}}</textarea>
+                        <textarea class="form-control align-middle field" name="formRequirements" id="requirements" rows="5" placeholder="Describe everything about requirements">{{stripslashes($selectedfund->requirements)}}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label" for="deadline"><strong>Deadline:</strong></label>
-                        <textarea class="form-control align-middle field" name="formDeadline" id="deadline" rows="2" placeholder="Describe everything about deadline">{{$selectedfund->deadline}}</textarea>
+                        <textarea class="form-control align-middle field" name="formDeadline" id="deadline" rows="2" placeholder="Describe everything about deadline">{{stripslashes($selectedfund->deadline)}}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -489,21 +489,22 @@
 
                     <div class="form-group">
                         <label class="control-label" for="memo"><strong>Memo:</strong></label>
-                        <textarea class="form-control align-middle field" name="formMemo" id="memo" rows="4" placeholder="Write a memo for this fund">{{$selectedfund->memo}}</textarea>
+                        <textarea class="form-control align-middle field" name="formMemo" id="memo" rows="4" placeholder="Write a memo for this fund">{{stripslashes($selectedfund->memo)}}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label" for="farsi"><strong>Persian Description:</strong></label>
-                        <textarea class="form-control align-middle field" name="formFarsi" id="farsi" rows="4" placeholder="چند خطی به فارسی درباره‌ی این فاند بنویسید">{{$selectedfund->farsi}}</textarea>
+                        <textarea class="form-control align-middle field" name="formFarsi" id="farsi" rows="4" placeholder="چند خطی به فارسی درباره‌ی این فاند بنویسید">{{stripslashes($selectedfund->farsi)}}</textarea>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label" for="comments"><strong>Comments:</strong></label>
-                        <textarea class="form-control align-middle field" name="formComments" id="comments" rows="4" placeholder="Write any comments about this fund here">{{$selectedfund->comments}}</textarea>
+                        <textarea class="form-control align-middle field" name="formComments" id="comments" rows="4" placeholder="Write any comments about this fund here">{{stripslashes($selectedfund->comments)}}</textarea>
                     </div>
 
                     <div class="text-center">
                         <button id="deleteButton" class="btn btn-danger my-btn" style="margin: 15px 0 5px 0;" type="submit">Delete</button>
+                        <a class="btn btn-primary my-btn" style="margin: 15px 0 5px 0;" href="{{'../show/fund/'.$selectedfund->id}}">View</a>
                     </div>
                 </div>
             </div>

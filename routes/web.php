@@ -29,14 +29,13 @@ Route::get('/test', 'testController@show');
 Route::get('/homepage', 'homepageController@show');
 Route::post('/search', 'searchController@search'); //this should become post
 
-
 //----------------------------------------------
 #               Country Routes
 //----------------------------------------------
 
-Route::put('/country', 'countryController@add');
-Route::delete('/country/{id}', 'countryController@delete');
-Route::patch('/country/{id}', 'countryController@update');
+Route::put('/country', 'countryController@add')->middleware('auth');;
+Route::delete('/country/{id}', 'countryController@delete')->middleware('auth');;
+Route::patch('/country/{id}', 'countryController@update')->middleware('auth');;
 Route::get('/addCountry', function (){
     $countries = \App\country::all();
    return view('addCountry')->with(compact('countries'));
@@ -47,9 +46,9 @@ Route::get('/addCountry', function (){
 //----------------------------------------------
 
 
-Route::put('/field', 'fieldController@add');
-Route::delete('/field/{id}', 'fieldController@delete');
-Route::patch('/field/{id}', 'fieldController@update');
+Route::put('/field', 'fieldController@add')->middleware('auth');;
+Route::delete('/field/{id}', 'fieldController@delete')->middleware('auth');;
+Route::patch('/field/{id}', 'fieldController@update')->middleware('auth');;
 Route::get('/addField', function (){
     $fields = \App\field::all();
     return view('addField')->with(compact('fields'));
@@ -60,9 +59,9 @@ Route::get('/addField', function (){
 //----------------------------------------------
 
 
-Route::put('/organization', 'organizationController@add');
-Route::delete('/organization/{id}', 'organizationController@delete');
-Route::patch('/organization/{id}', 'organizationController@update');
+Route::put('/organization', 'organizationController@add')->middleware('auth');;
+Route::delete('/organization/{id}', 'organizationController@delete')->middleware('auth');;
+Route::patch('/organization/{id}', 'organizationController@update')->middleware('auth');;
 Route::get('/addOrganization', function (){
     $organizations = \App\organization::with('country')->get();
     $countries = \App\country::all();
@@ -75,9 +74,9 @@ Route::get('/addOrganization', function (){
 //----------------------------------------------
 
 
-Route::put('/category', 'categoryController@add');
-Route::delete('/category/{id}', 'categoryController@delete');
-Route::patch('/category/{id}', 'categoryController@update');
+Route::put('/category', 'categoryController@add')->middleware('auth');;
+Route::delete('/category/{id}', 'categoryController@delete')->middleware('auth');;
+Route::patch('/category/{id}', 'categoryController@update')->middleware('auth');;
 Route::get('/addCategory', function (){
     $categories = \App\tag::orderBy('real')->get();
     return view('addCategory')->with(compact('categories'));
@@ -88,11 +87,12 @@ Route::get('/addCategory', function (){
 //----------------------------------------------
 
 
-Route::put('/fund', 'fundController@add');
-Route::patch('/fund/{id}', 'fundController@update');
+Route::put('/fund', 'fundController@add')->middleware('auth');;
+Route::patch('/fund/{id}', 'fundController@update')->middleware('auth');;
 Route::get('/fund/{id}', 'fundController@show')->middleware('auth');
-Route::delete('/fund/{id}', 'fundController@del');
-Route::post('/newFund', 'fundController@newFund');
+Route::delete('/fund/{id}', 'fundController@del')->middleware('auth');;
+Route::post('/newFund', 'fundController@newFund')->middleware('auth');;
+Route::get('/show/fund/{id}', 'fundController@present');
 Route::get('/addFund', function (){
     return view('addFund');
 });

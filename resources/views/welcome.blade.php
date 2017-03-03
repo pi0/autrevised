@@ -96,13 +96,13 @@
                 <div class="links">
                     @if (Route::has('login'))
                             @if (Auth::check())
-                                <a class="btn btn-primary" href="{{url('/Import')}}">Import</a>
-                                <a class="btn btn-primary" href="{{url('/New')}}">New</a>
+                                <a class="btn btn-primary" href="{{url('/import')}}">Import</a>
+                                <a class="btn btn-primary" href="{{url('/addFund')}}">New</a>
                             @else
                         <a class="btn btn-primary" href="{{url('/login')}}">Login</a>
                             @endif
                     @endif
-                    <a class="btn btn-primary" href="{{url('/Search')}}">Search</a>
+                    <a class="btn btn-primary" href="{{url('/homepage')}}">Search</a>
                 </div>
             </div>
         </div>

@@ -5,12 +5,25 @@
 
 @section('content')
     <script>
+        $(document).ready(function () {
+            $(".List").select2();
+            $("#resetFilters").click(function (event) {
+                event.preventDefault();
+                $(".List").val(null).trigger("change");
+            })
+        });
 
     </script>
 
+    <style>
+        input{
+            font-family: Shabnam, Raleway;
+        }
+    </style>
+
 <div class="container my-whole-page">
     <div class="row pl-3">
-        <div class="container-fluid filter_res col-lg-4 col-sm-4">
+        <div class="card p-3 col-lg-3 col-sm-3">
             <h2 class="title">Filters</h2>
             <ul class="nav nav-pills flex-column">
                 <div class="btn btn-success" id="resetFilters">Reset all</div>
@@ -21,13 +34,13 @@
                     </a>
                 </li>
                 <div class="collapse" id="categoryPan">
-                    <ul class="nav nav-pills flex-column nav-stacked my-stack" id="CategoryFilter">
+                    <select class="form-control List js-states" title="Choose your option..." style="width: 100%" id="CategoryFilter" multiple="multiple">
                         @foreach($categories as $category)
-                            <li id="{{$category->id}}">
-                                <a class="my-pill nav-link myCategory">{{$category->real}} - {{$category->description}}</a>
-                            </li>
+                            <option value="{{$category->id}}">
+                                {{$category->real}} - {{$category->description}}
+                            </option>
                         @endforeach
-                    </ul>
+                    </select>
                 </div>
 
 
@@ -38,13 +51,13 @@
                     </a>
                 </li>
                 <div class="collapse" id="orgPan">
-                    <ul class="nav nav-pills nav-stacked my-stack flex-column" id="OrgFilter">
-                        @foreach($organizations as $organization)
-                            <li id="{{$organization->id}}">
-                                <a class="my-pill nav-link myOrganization">{{$organization->name}} - {{$organization->country->name}}</a>
-                            </li>
+                    <select class="List js-states form-control" style="width: 100%" id="OrgFilter" multiple="multiple">
+                        @foreach($organizations as $org)
+                            <option value="{{$org->id}}">
+                                {{$org->name}} - {{$org->country->name}}
+                            </option>
                         @endforeach
-                    </ul>
+                    </select>
                 </div>
 
                 <li class="nav-item">
@@ -54,13 +67,13 @@
                     </a>
                 </li>
                 <div class="collapse" id="countryPan">
-                    <ul class="nav nav-pills nav-stacked my-stack flex-column" id="CountryFilter">
+                    <select class="List js-states form-control" style="width: 100%" id="CountryFilter" multiple="multiple">
                         @foreach($countries as $country)
-                            <li id="{{$country->id}}" class="nav-item">
-                                <a class="my-pill nav-link myCountry" >{{$country->name}}</a>
-                            </li>
+                            <option value="{{$country->id}}">
+                                {{$country->name}}
+                            </option>
                         @endforeach
-                    </ul>
+                    </select>
                 </div>
 
                 <li class="nav-item">
@@ -70,29 +83,29 @@
                     </a>
                 </li>
                 <div class="collapse" id="researchPan">
-                    <ul class="nav nav-pills flex-column nav-stacked my-stack" id="ResearchFilter">
+                    <select class="List js-states form-control" style="width: 100%" id="ResearchFilter" multiple="multiple">
                         @foreach($fields as $field)
-                            <li id="{{$field->id}}">
-                                <a class="my-pill nav-link myField">{{$field->title}}</a>
-                            </li>
+                            <option value="{{$field->id}}">
+                                {{$field->title}}
+                            </option>
                         @endforeach
-                    </ul>
+                    </select>
                 </div>
 
 
             </ul>
         </div>
-        <div class="container-fluid col-sm-8 col-lg-8">
+        <div class="card p-3 ml-sm-3 col-sm-8 col-lg-8">
 
-            <input class="form-control my-input" placeholder="Search..." type="search" id="searchbox">
-            <div class="container-fluid filter_res p-sm-3" style="margin: 15px 0 15px 0;">
+            <input class="form-control form-control-lg" placeholder="Search..." type="search" id="searchbox">
+            <div class="p-3 p-sm-3 mt-0" style="margin: 15px 0 15px 0;">
                 <h2 class="title">Search Results</h2>
                 <hr>
-                <nav class="card">
+                {{--<nav class="card bg-success">--}}
 
 
 
-                    <div id="myTabContent" class="tab-content p-sm-3">
+                    <div id="myTabContent" class="tab-content mb-3">
 
 
                         <ul class="list-group tab-pane active" id="list" style="margin-top: 10px">
@@ -110,7 +123,7 @@
                                           @if(!\Illuminate\Support\Facades\Auth::guest())
                                                 <a href="fund/{{$fund->id}}" class="btn btn-sm btn-success ml-1 editLink">Edit</a>
                                             @endif
-                                            <a href="fund/{{$fund->id}}" class="btn btn-sm btn-primary pull-left viewLink">View</a>
+                                            <a href="show/fund/{{$fund->id}}" class="btn btn-sm btn-primary pull-left viewLink">View</a>
                                         </span>
 
                                     </div>
@@ -119,7 +132,7 @@
                         </ul>
 
                     </div>
-                    <nav aria-label="Page navigation">
+                    <nav aria-label="Page navigation" >
                         <ul class="pagination justify-content-center">
                             <li class="page-item"><a class="page-link">&laquo;</a></li>
                             @foreach($count as $num)
@@ -128,7 +141,7 @@
                             <li class="page-item"><a class="page-link">&raquo;</a></li>
                         </ul>
                     </nav>
-                </div>
+                {{--</div>--}}
             </div>
         </div>
     </div>

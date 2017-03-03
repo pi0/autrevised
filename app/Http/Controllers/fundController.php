@@ -66,6 +66,16 @@ class fundController extends Controller
         return view('fundEdit')->with(compact('funds', 'categories', 'organizations', 'countries', 'fields', 'selectedfund', 'fundCategories', 'fundCountries', 'fundFields', 'fundOrganizations'));
     }
 
+
+    public function present($id){
+        $fund = fund::find($id);
+        $categories = $fund->tags->all();
+        $organizations = $fund->organization;
+        $countries = $organizations->country;
+        $fields = $fund->fields->all();
+        return view('presentFund')->with(compact('fund', 'categories', 'organizations', 'countries', 'fields'));
+    }
+
     public function update(Request $r, $id){
         $field_name = $r->field_name;
         $fund_id = $id;

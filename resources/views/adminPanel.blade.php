@@ -157,7 +157,7 @@
             <div class="col-sm-4">
                 <div class="row">
                     <div class="card col-sm-12 p-0">
-                        <h3 class="jumbotron">Hello, {{auth()->user()->name}}. Welcome</h3>
+                        <h3 class="jumbotron bg-primary" style="color: white">Hello, {{auth()->user()->name}}. Welcome</h3>
                     </div>
                     <div class="col-sm-6 p-0 pr-2">
                         <div class="card mt-3 text-center">

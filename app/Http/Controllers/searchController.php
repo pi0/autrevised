@@ -7,6 +7,7 @@ use App\field;
 use App\fund;
 use App\organization;
 use App\tag;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class searchController extends Controller
@@ -90,13 +91,30 @@ class searchController extends Controller
             return $filteredBeforeResult;
         $ree = array();
         $rmp = tag::find($tag_ids);
+
+
         foreach ($rmp as $r){
-            foreach ($r->funds as $fund)
-                if(in_array($fund->id, $filteredBeforeResult))
-                    array_push($ree, $fund->id);
+            $collectedTags = collect([$r]);
+            $toBeLooked = $this->findChildren($r, $collectedTags);
+
+            foreach ($toBeLooked as $t)
+                foreach ($t->funds as $fund)
+                    if(in_array($fund->id, $filteredBeforeResult))
+                        array_push($ree, $fund->id);
         }
 
         return array_unique($ree);
+    }
+
+
+    private function findChildren(tag $tag,$collectedTags){
+        $children = $tag->children;
+        if(!($children->isEmpty())) {
+            foreach ($children as $child)
+                $collectedTags->merge($this->findChildren($child, $collectedTags));
+        } else
+            $collectedTags->push($tag);
+        return $collectedTags;
     }
 
     private function filterByCountry($filteredBeforeResult, $country_ids){

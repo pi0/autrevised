@@ -54,7 +54,7 @@ class searchController extends Controller
         $final = $this->filterByRating($filteredByOrgFieldTagCountry, $ratings);
         $count = fund::find($final)->count();
         $Results = fund::with('organization')->find($final)->toArray();
-        $finalResults = array_slice($Results,$offset,5);
+        $finalResults = array_slice($Results,$offset,8);
         return response()->json(['count'=> $count, 'result'=>$finalResults]);
     }
 

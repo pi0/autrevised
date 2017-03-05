@@ -130,7 +130,7 @@ function onPage(event) {
 function refreshFunds(res) {
     var tmp = jQuery.parseJSON(res);
     var data = tmp.result;
-    var count = tmp.count/5;
+    var count = tmp.count/8;
     $('#list').empty();
     // var d = jQuery.parseJSON(data);
     for(var i=0; i<data.length; i++) {

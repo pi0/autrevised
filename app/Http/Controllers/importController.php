@@ -28,7 +28,7 @@ class importController extends Controller
             $initRead = $this->InitialRead($sheets);
             $this->FundTableInit($initRead, $organization);
         });
-
+        return redirect('/homepage');
     }
 
 
@@ -39,7 +39,7 @@ class importController extends Controller
 
             $rows = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 
-            $fund_name_cell = 'B3';
+            $fund_name_cell = 'B4';
 
             $fund_name_row = preg_replace("/[^a-zA-Z]/", "", $fund_name_cell);
             $fund_name_col = (int) (preg_replace("/[^0-9]/", "", $fund_name_cell));

@@ -8,6 +8,7 @@ use App\fund;
 use App\organization;
 use App\tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class homepageController extends Controller
 {
@@ -53,7 +54,11 @@ class homepageController extends Controller
     }
 
     private function getCategories(){
-        return tag::all();
+        $tagsInOrder = new Collection();
+        $tags = tag::where('parent_id', 0)->get();
+        foreach ($tags as $tag)
+            $tagsInOrder->merge($this->findChildren($tag, $tagsInOrder));
+        return $tagsInOrder;
     }
 
     private function getCountries(){
@@ -66,6 +71,17 @@ class homepageController extends Controller
 
     private function getFields(){
         return field::all();
+    }
+
+    private function findChildren(tag $tag,$collectedTags){
+        $children = $tag->children;
+        if(!($children->isEmpty())) {
+            $collectedTags->push($tag);
+            foreach ($children as $child)
+                $collectedTags->merge($this->findChildren($child, $collectedTags));
+        } else
+            $collectedTags->push($tag);
+        return $collectedTags;
     }
 
 }

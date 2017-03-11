@@ -7,6 +7,7 @@ use App\field;
 use App\fund;
 use App\organization;
 use App\tag;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class fundController extends Controller
@@ -129,7 +130,25 @@ class fundController extends Controller
     }
 
     private function getCategories(){
-        return tag::all();
+        $tagsInOrder = new Collection();
+        $tags = tag::where('parent_id', 0)->get();
+        foreach ($tags as $tag)
+            $tagsInOrder->merge($this->findChildren($tag, $tagsInOrder));
+        return $tagsInOrder;
+    }
+
+    private function findChildren(tag $tag,$collectedTags){
+        $me = $tag;
+        $me["is_parent"] = false;
+        $children = $tag->children;
+        if(!($children->isEmpty())) {
+            $me["is_parent"] = true;
+            $collectedTags->push($me);
+            foreach ($children as $child)
+                $collectedTags->merge($this->findChildren($child, $collectedTags));
+        } else
+            $collectedTags->push($tag);
+        return $collectedTags;
     }
 
     private function getCountries(){

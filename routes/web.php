@@ -78,7 +78,7 @@ Route::put('/category', 'categoryController@add')->middleware('auth');;
 Route::delete('/category/{id}', 'categoryController@delete')->middleware('auth');;
 Route::patch('/category/{id}', 'categoryController@update')->middleware('auth');;
 Route::get('/addCategory', function (){
-    $categories = \App\tag::orderBy('real')->get();
+    $categories = \App\tag::with('tag')->get();
     return view('addCategory')->with(compact('categories'));
 });
 
@@ -115,5 +115,10 @@ Route::post('adminPanel', 'adminController@register')->middleware('admin');
 Route::post('/users/{id}', 'adminController@setUnsetAdmin')->middleware('admin');
 Route::delete('/users/{id}', 'adminController@deleteUser')->middleware('admin');
 
+//----------------------------------------------
+#               Report Routes
+//----------------------------------------------
+
+Route::get('report', 'reportController@show')->middleware('admin');
 
 

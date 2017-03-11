@@ -69,9 +69,9 @@ $(".List").change(function () {
 });
 
 
-$("#searchbox").on('keypress', function (event) {
+$("#searchbox").on('keyup', function (event) {
     document.offset = 0;
-   if(event.which == 13)
+   if(event.which == 13 || (!$(this).val()))
    {
        event.preventDefault();
        var $text = '';

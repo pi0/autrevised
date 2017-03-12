@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\fund;
 use App\tag;
+use Barryvdh\DomPDF\PDF;
+use Barryvdh\Snappy\Facades\SnappyPdf;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\View;
 
 class reportController extends Controller
 {

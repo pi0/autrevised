@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     @foreach($funds as $arr)
         @if(!$arr["funds"]->isEmpty() || !$arr["tag"]->children->isEmpty())
             @if($arr["tag"]["is_parent"] && $arr["tag"]->parent_id == 0)
@@ -11,7 +10,7 @@
                     </h1>
                 </div>
             @else
-            <div class="container">
+            <div class="container ">
                 <div class="card mb-5 bg-success pt-5" style="height: 140px;color: whitesmoke">
                     <h3 class="align-middle text-center" >
                         {{$arr["tag"]->real}} - {{$arr["tag"]->description}}
@@ -24,10 +23,15 @@
                         .btn{
                             border-radius: 25px;
                         }
+
+                        .pageBreak{
+                            page-break-after: always;
+                            page-break-before: always;
+                        }
                     </style>
 
 
-                    <div class="container mb-5">
+                    <div class="container mb-5 pageBreak printed">
                         <div class="card">
                             <div class="card-block">
                                 <div class="card-title">

@@ -126,3 +126,29 @@ li{
     color: white;
 }
 
+
+@media print {
+
+    .printed{
+        position: absolute;
+        margin: 10px;
+        margin-top: 10%;
+        page-break-inside: avoid;
+    }
+
+    *::first-letter{
+        line-height: inherit;
+    }
+
+
+    
+    @page  {
+        size: A3 landscape;
+        margin: 0;
+
+        @bottom-right {
+            content: counter(page);
+        }
+    }
+
+}

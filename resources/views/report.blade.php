@@ -35,12 +35,12 @@
                         <div class="card">
                             <div class="card-block">
                                 <div class="card-title">
-                                    <h2 class="justify-content-between">
-                                        {{stripslashes($fund->name)}}
-                                        @if(Auth::user())
-                                            <a class="btn btn-primary pull-right" href="{{url('fund/'.$fund->id)}}">Edit</a>
-                                        @endif
-                                    </h2>
+                                    {{--<h2 class="justify-content-between">--}}
+                                        {{--{{stripslashes($fund->name)}}--}}
+                                        {{--@if(Auth::user())--}}
+                                            {{--<a class="btn btn-primary pull-right" href="{{url('fund/'.$fund->id)}}">Edit</a>--}}
+                                        {{--@endif--}}
+                                    {{--</h2>--}}
                                     <div class="row ml-1">
                                         @foreach($fund->tags as $category)
                                             <span class="badge badge-default badge-pill mr-1">{{$category->description}}</span>
@@ -140,14 +140,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="text-center col-sm-4 push-sm-4 mt-3" id="links">
-                                        @if($fund->link1)
-                                            <a target="_blank" href="{{url($fund->link1)}}" class="btn btn-lg btn-success">Link 1</a>
-                                        @endif
-                                        @if($fund->link2)
-                                            <a target="_blank" href="{{url($fund->link2)}}" class="btn btn-lg btn-success">Link 2</a>
-                                        @endif
-                                    </div>
+                                    {{--<div class="text-center col-sm-4 push-sm-4 mt-3" id="links">--}}
+                                        {{--@if($fund->link1)--}}
+                                            {{--<a target="_blank" href="{{url($fund->link1)}}" class="btn btn-lg btn-success">Link 1</a>--}}
+                                        {{--@endif--}}
+                                        {{--@if($fund->link2)--}}
+                                            {{--<a target="_blank" href="{{url($fund->link2)}}" class="btn btn-lg btn-success">Link 2</a>--}}
+                                        {{--@endif--}}
+                                    {{--</div>--}}
 
                                 </div>
                             </div>

@@ -171,7 +171,6 @@ return [
 
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider', // Laravel IDE helper
         'Maatwebsite\Excel\ExcelServiceProvider', // Laravel Excel
-        Barryvdh\DomPDF\ServiceProvider::class,
 
         //
 
@@ -232,7 +231,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
-        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

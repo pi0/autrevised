@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\admin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Kernel extends HttpKernel
 {
@@ -55,4 +56,27 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin' => admin::class,
     ];
+
+
+    public function handle($request)
+    {
+        try
+        {
+            return parent::handle($request);
+        }
+        catch(NotFoundHttpException  $e)
+        {
+                return response()->view('errors.404', [], 404);
+
+        }
+        catch (\ErrorException $e)
+        {
+//            if($e->getMessage() == 'Trying to get property of non-object')
+                return response()->view('errors.404', [], 404);
+
+            $this->reportException($e);
+
+            return $this->renderException($request, $e);
+        }
+    }
 }

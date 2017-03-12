@@ -46,6 +46,10 @@ class fundController extends Controller
 
 
     public function show($id){
+        $selectedfund = fund::find($id);
+        if(!$selectedfund)
+            return view('errors.404');
+
         $funds = $this->getFunds();
         $countries = $this->getCountries();
         $fields = $this->getFields();
@@ -59,7 +63,8 @@ class fundController extends Controller
         }
 
 
-        $selectedfund = fund::find($id);
+
+
         $fundCategories = $selectedfund->tags->all();
         $fundOrganizations = $selectedfund->organization;
         $fundCountries = $fundOrganizations->country;

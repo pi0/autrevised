@@ -395,6 +395,9 @@
                                         selected="selected"
                                     @endif
                                 @endforeach
+                                @if($category->is_parent)
+                                        disabled="disabled"
+                                @endif
                                 >
                                     {{$category->real}} - {{$category->description}}
                                 </option>

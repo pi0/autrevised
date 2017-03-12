@@ -7,9 +7,6 @@
                 <h4 style="display: inline">{{ $category->id }} - {{ $category->description}} - {{ $category->parent_id }} - {{ $category->real }}</h4>
                     <button role="delete" data-content="{{$category->id}}" class="btn btn-sm btn-danger pull-right">delete</button>
                     <button role="addChild" data-content="{{$category->id}}" class="btn btn-sm btn-success pull-right">Add Child</button>
-                <p>
-                    {{$category}}
-                </p>
             </li>
         @endforeach
     </ul>

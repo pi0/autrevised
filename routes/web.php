@@ -78,7 +78,7 @@ Route::put('/category', 'categoryController@add')->middleware('auth');;
 Route::delete('/category/{id}', 'categoryController@delete')->middleware('auth');;
 Route::patch('/category/{id}', 'categoryController@update')->middleware('auth');;
 Route::get('/addCategory', function (){
-    $categories = \App\tag::with('tag')->get();
+    $categories = \App\tag::orderBy('real')->get();
     return view('addCategory')->with(compact('categories'));
 });
 

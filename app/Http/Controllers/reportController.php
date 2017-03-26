@@ -16,7 +16,7 @@ class reportController extends Controller
     public function show(){
       $funds = new Collection();
       foreach ($this->getCategories() as $tag){
-          $tmp = $tag->funds()->with('tags', 'organization', 'fields')->orderBy('organization_id')->get();
+          $tmp = $tag->funds()->where('visible',true)->with('tags', 'organization', 'fields')->orderBy('organization_id')->get();
           $fundsTmp = new Collection();
           foreach ($tmp as $fund){
               $fundsTmp->push($fund);

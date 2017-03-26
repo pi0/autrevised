@@ -33,6 +33,12 @@ $(document).ready(function () {
     $(".field").on('change',function(event){
         var field_name = $(this).attr('id');
         var field_value = $(this).val();
+        if($(this).attr('id') == 'visible'){
+            field_value = 0;
+            if($(this).is(':checked'))
+                field_value = 1;
+            console.log(field_value);
+        }
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({

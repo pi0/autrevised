@@ -21,27 +21,27 @@ USE `aut_revised`;
 -- Table structure for table `countries`
 --
 
-DROP TABLE IF EXISTS `countries`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `countries` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  DROP TABLE IF EXISTS `countries`;
+  /*!40101 SET @saved_cs_client     = @@character_set_client */;
+  /*!40101 SET character_set_client = utf8 */;
+  CREATE TABLE `countries` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+    `created_at` timestamp NULL DEFAULT NULL,
+    `updated_at` timestamp NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `countries`
---
+  --
+  -- Dumping data for table `countries`
+  --
 
-LOCK TABLES `countries` WRITE;
-/*!40000 ALTER TABLE `countries` DISABLE KEYS */;
-INSERT INTO `countries` VALUES (1,'Germany','2017-02-02 18:30:34','2017-02-02 18:30:34'),(2,'Iran','2017-02-02 18:30:39','2017-02-02 18:30:39'),(3,'France','2017-02-02 18:30:43','2017-02-02 18:30:43'),(4,'European Union','2017-03-05 11:13:02','2017-03-05 11:13:02');
-/*!40000 ALTER TABLE `countries` ENABLE KEYS */;
-UNLOCK TABLES;
+  LOCK TABLES `countries` WRITE;
+  /*!40000 ALTER TABLE `countries` DISABLE KEYS */;
+  INSERT INTO `countries` VALUES (1,'Germany','2017-02-02 18:30:34','2017-02-02 18:30:34'),(2,'Iran','2017-02-02 18:30:39','2017-02-02 18:30:39'),(3,'France','2017-02-02 18:30:43','2017-02-02 18:30:43'),(4,'European Union','2017-03-05 11:13:02','2017-03-05 11:13:02');
+  /*!40000 ALTER TABLE `countries` ENABLE KEYS */;
+  UNLOCK TABLES;
 
 --
 -- Table structure for table `field_fund`

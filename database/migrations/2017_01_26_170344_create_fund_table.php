@@ -29,6 +29,7 @@ class CreateFundTable extends Migration
             $table->text('memo')->nullable();
             $table->text('farsi');
             $table->text('comments')->nullable();
+            $table->boolean('visible')->default(true);
             $table->integer('organization_id')->unsigned();
         });
     }

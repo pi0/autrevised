@@ -50,7 +50,7 @@ class homepageController extends Controller
 
 
     private function getFunds(){
-        return fund::all()->take(10);
+        return fund::where('visible',1)->take(10)->get();
     }
 
     private function getCategories(){

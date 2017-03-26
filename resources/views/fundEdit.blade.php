@@ -505,6 +505,18 @@
                         <textarea class="form-control align-middle field" name="formComments" id="comments" rows="4" placeholder="Write any comments about this fund here">{{stripslashes($selectedfund->comments)}}</textarea>
                     </div>
 
+                    <div class="form-group text-center">
+                        <label class="custom-control custom-checkbox">
+                            <input class="custom-control-input align-middle field" name="formVisible" id="visible" type="checkbox"
+                                   @if($selectedfund->visible)
+                                   checked="checked"
+                                    @endif
+                            >
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description"><strong>Visible</strong></span>
+                        </label>
+                    </div>
+
                     <div class="text-center">
                         <button id="deleteButton" class="btn btn-danger my-btn" style="margin: 15px 0 5px 0;" type="submit">Delete</button>
                         <a class="btn btn-primary my-btn" style="margin: 15px 0 5px 0;" href="{{'../show/fund/'.$selectedfund->id}}">View</a>

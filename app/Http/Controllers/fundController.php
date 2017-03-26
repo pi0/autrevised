@@ -73,8 +73,13 @@ class fundController extends Controller
     }
 
 
-    public function present($id){
-        $fund = fund::find($id);
+    public function present($id, Request $r){
+        if($r->user())
+            $fund = fund::find($id);
+        else
+            $fund = fund::where('visible',true)->find($id);
+        if(!$fund)
+            return view('errors.404');
         $categories = $fund->tags->all();
         $organizations = $fund->organization;
         $countries = $organizations->country;
@@ -131,7 +136,7 @@ class fundController extends Controller
     }
 
     private function getFunds(){
-        return fund::all()->take(10);
+        return fund::where('visible',true)->take(10)->get();
     }
 
     private function getCategories(){
